@@ -28,11 +28,16 @@ const _nav = [
       text: 'NEW',
     },
   },
-  // {
-  //   component: CNavTitle,
-  //   name: 'Theme',
-  // },
-
+  {
+    component: CNavItem,
+    name: 'Users',
+    to: '/users',
+  },
+  {
+    component: CNavItem,
+    name: 'Calendar',
+    to: '/calendar',
+  },
   {
     component: CNavGroup,
     name: 'Buttons',
