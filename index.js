@@ -8,6 +8,7 @@ const billReq = require("./src/Modules/public/Bills/indexBill");
 const roleReq = require("./src/Modules/public/role/index");
 const roleScreensReq = require("./src/Modules/public/Role Screens/index");
 const screensReq = require("./src/Modules/public/Screens/index");
+const logInReq = require("./src/Modules/public/login/index");
 app.use(express.json());
 app.use(cors());
 
@@ -42,6 +43,10 @@ app.use("/role_screens", roleScreensReq.readData);
 app.use("/screens", screensReq.readData);
 // app.use("/role", roleReq.updateData);
 // app.use("/role", roleReq.deleteData);
+
+//login
+app.use("/login", logInReq.postData);
+
 
 
 

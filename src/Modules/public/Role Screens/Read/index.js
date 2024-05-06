@@ -20,7 +20,9 @@ usersRead.get("/", async (req, res) => {
       const { limit, ...newObj } = queryParams;
       queryString += ` limit ${limit}`;
     }
-    const val = Object.values(queryParams);
+    const { limit, ...newObj } = queryParams;
+
+    const val = Object.values(newObj);
 
     if (!positiveNumberCheck(val)) {
       const { limit, ...newObj } = queryParams;
