@@ -62,9 +62,6 @@ billsBulkPost.post("/", async (req, res) => {
 
       values.push(...itemValues);
     }
-    console.log(fields.join(","));
-    console.log(valuesClause);
-    console.log(values);
     const { rows } = await pool.query(query, values);
 
     // Sending response with inserted data

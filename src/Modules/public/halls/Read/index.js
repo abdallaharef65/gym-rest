@@ -1,13 +1,13 @@
 const express = require("express");
 const pool = require("../../../../pool");
 const positiveNumberCheck = require("../../../../utils/positiveNumberCheck");
-const usersRead = express.Router();
+const hallsRead = express.Router();
 
-usersRead.get("/", async (req, res) => {
+hallsRead.get("/", async (req, res) => {
   try {
     const queryParams = req.query;
     const keys = Object.keys(queryParams);
-    let queryString = `SELECT * FROM public."v_role" WHERE 1=1`;
+    let queryString = `SELECT * FROM public."halls" WHERE 1=1`;
     var haveLimit = false;
     for (let i = 0; i < keys.length; ++i) {
       if (keys[i] != "limit") {
@@ -31,8 +31,7 @@ usersRead.get("/", async (req, res) => {
           res.send({
             success: true,
             no_of_records: rows.length,
-            msg: `role${1 === rows.length ? " was" : "ies were"
-              } retrieved successfully.`,
+            msg: `halls retrieved successfully.`,
             data: rows,
           });
         } else {
@@ -51,4 +50,4 @@ usersRead.get("/", async (req, res) => {
   }
 });
 
-module.exports = usersRead;
+module.exports = hallsRead;
