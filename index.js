@@ -10,6 +10,7 @@ const roleScreensReq = require("./src/Modules/public/Role Screens/index");
 const screensReq = require("./src/Modules/public/Screens/index");
 const logInReq = require("./src/Modules/public/login/index");
 const hallsReq = require("./src/Modules/public/halls/index");
+const appointmentsReq = require("./src/Modules/public/Appointments/index");
 app.use(express.json());
 app.use(cors());
 
@@ -49,6 +50,14 @@ app.use("/halls", hallsReq.postData);
 app.use("/halls", hallsReq.readData);
 app.use("/halls", hallsReq.updateData);
 app.use("/halls", hallsReq.deleteData);
+
+//appointments
+app.use("/appointments", appointmentsReq.readData);
+app.use("/appointments", appointmentsReq.postData);
+app.use("/appointmentsbulk", appointmentsReq.appointmentsBulkPost);
+app.use("/appointments", appointmentsReq.updateData);
+app.use("/appointments", appointmentsReq.deleteData);
+
 
 //login
 app.use("/login", logInReq.postData);
