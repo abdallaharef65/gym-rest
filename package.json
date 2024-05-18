@@ -2,11 +2,14 @@
   "name": "crash-course",
   "version": "1.0.0",
   "description": "a node crash course",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "yarn && nodemon index.js",
-    "start": "node server.js"
+    "dev": "yarn && nodemon app.js",
+    "start": "node app.js"
+  },
+  "engines": {
+    "node": "21.x"
   },
   "repository": {
     "type": "git",
