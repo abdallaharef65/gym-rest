@@ -43,11 +43,11 @@ usersRead.get("/", async (req, res) => {
     } else {
       res
         .status(500)
-        .json({ success: false, message: "all field must be positive" });
+        .json({ success: false, message: "all field must be positive123" });
     }
   } catch (error) {
     console.log(error.message);
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: "aref" });
   }
 });
 
