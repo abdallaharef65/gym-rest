@@ -2,8 +2,9 @@ const express = require("express");
 const pool = require("../../../../pool");
 const positiveNumberCheck = require("../../../../utils/positiveNumberCheck");
 const appointmentsRead = express.Router();
+const { requireAuth } = require("../../../../middleware/authMiddleware");
 //v_appointments
-appointmentsRead.get("/", async (req, res) => {
+appointmentsRead.get("/",requireAuth, async (req, res) => {
   try {
     const queryParams = req.query;
     const keys = Object.keys(queryParams);

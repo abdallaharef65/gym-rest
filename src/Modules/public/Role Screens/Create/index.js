@@ -1,7 +1,8 @@
 const express = require("express");
 const pool = require("../../../../pool");
 const usersPost = express.Router();
-usersPost.post("/", async (req, res) => {
+const { requireAuth } = require("../../../../middleware/authMiddleware");
+usersPost.post("/",requireAuth, async (req, res) => {
   try {
     //////////////////////////////////////////
     const { id, screens, ...newObj } = req.body;
@@ -59,7 +60,6 @@ usersPost.post("/", async (req, res) => {
         bodyDataRoleScreen.push(body);
       }
     }
-    console.log(bodyDataRoleScreen);
 
     const data = bodyDataRoleScreen;
 
@@ -75,7 +75,6 @@ usersPost.post("/", async (req, res) => {
       }
       orderValue.push(`(${data1.map((y) => y).join(",")})`);
     }
-    console.log("orderValue>>>>>>>>>>>>", orderValue.map((y) => y).join(","));
 
     //value Role Screen
     var valueRoleScreen = [];
@@ -83,8 +82,8 @@ usersPost.post("/", async (req, res) => {
       const itemValues = Object.values(bodyDataRoleScreen[i]);
       valueRoleScreen.push(...itemValues);
     }
-    console.log("valueRoleScreen>>>>>>>>>>>>>>>>>>", valueRoleScreen);
-    const {rows} = await pool.query(
+
+    const { rows } = await pool.query(
       `INSERT INTO public."Role_Screens"(${fieldsRoleScreen}) VALUES${orderValue
         .map((y) => y)
         .join(",")} RETURNING *`,

@@ -4,22 +4,15 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const usersReq = require("./src/Modules/public/Users/index");
-const billReq = require("./src/Modules/public/Bills/indexBill");
 const roleReq = require("./src/Modules/public/role/index");
 const roleScreensReq = require("./src/Modules/public/Role Screens/index");
 const screensReq = require("./src/Modules/public/Screens/index");
 const logInReq = require("./src/Modules/public/login/index");
 const hallsReq = require("./src/Modules/public/halls/index");
+const coursesReq = require("./src/Modules/public/courses/index");
 const appointmentsReq = require("./src/Modules/public/Appointments/index");
 app.use(express.json());
 app.use(cors());
-
-//bills
-app.use("/bills", billReq.postData);
-app.use("/bills", billReq.readData);
-app.use("/bills", billReq.updateData);
-app.use("/bills", billReq.deleteData);
-app.use("/billsBulk", billReq.bulkPostData);
 
 //user
 app.use("/user", usersReq.postData);
@@ -58,6 +51,11 @@ app.use("/appointmentsbulk", appointmentsReq.appointmentsBulkPost);
 app.use("/appointments", appointmentsReq.updateData);
 app.use("/appointments", appointmentsReq.deleteData);
 
+// courses
+app.use("/courses", coursesReq.postData);
+app.use("/courses", coursesReq.readData);
+app.use("/courses", coursesReq.updateData);
+app.use("/courses", coursesReq.deleteData);
 
 //login
 app.use("/login", logInReq.postData);

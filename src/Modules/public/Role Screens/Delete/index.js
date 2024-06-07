@@ -1,8 +1,8 @@
 const express = require("express");
 const pool = require("../../../../pool");
 const usersDelete = express.Router();
-
-usersDelete.delete("/", async (req, res) => {
+const { requireAuth } = require("../../../../middleware/authMiddleware");
+usersDelete.delete("/",requireAuth, async (req, res) => {
   try {
     const { role_id } = req.query;
     const rowsDelete = await pool.query(

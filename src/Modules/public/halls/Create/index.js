@@ -1,10 +1,10 @@
 const express = require("express");
 const pool = require("../../../../pool");
 const hallsPost = express.Router();
-hallsPost.post("/", async (req, res) => {
+const { requireAuth } = require("../../../../middleware/authMiddleware");
+hallsPost.post("/",requireAuth, async (req, res) => {
   try {
-    // console.log("post132");
-    const fields = Object.keys(req.body);
+  const fields = Object.keys(req.body);
     const values = Object.values(req.body);
     const OrderOfvalues = [];
     for (let i = 0; i < values.length; ++i) {

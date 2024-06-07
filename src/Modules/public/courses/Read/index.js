@@ -1,13 +1,13 @@
 const express = require("express");
 const pool = require("../../../../pool");
 const positiveNumberCheck = require("../../../../utils/positiveNumberCheck");
-const billsRead = express.Router();
-
-billsRead.get("/", async (req, res) => {
+const coursesRead = express.Router();
+const { requireAuth } = require("../../../../middleware/authMiddleware");
+coursesRead.get("/",requireAuth, async (req, res) => {
   try {
     const queryParams = req.query;
     const keys = Object.keys(queryParams);
-    let queryString = `SELECT * FROM public."Bills" WHERE 1=1`;
+    let queryString = `SELECT * FROM public."v_courses" WHERE 1=1`;
     var haveLimit = false;
     for (let i = 0; i < keys.length; ++i) {
       if (keys[i] != "limit") {
@@ -31,9 +31,7 @@ billsRead.get("/", async (req, res) => {
           res.send({
             success: true,
             no_of_records: rows.length,
-            msg: `Bill${
-              1 === rows.length ? "y was" : "ies were"
-            } retrieved successfully.`,
+            msg: `courses retrieved successfully.`,
             data: rows,
           });
         } else {
@@ -52,4 +50,4 @@ billsRead.get("/", async (req, res) => {
   }
 });
 
-module.exports = billsRead;
+module.exports = coursesRead;

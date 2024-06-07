@@ -1,8 +1,8 @@
 const express = require("express");
 const pool = require("../../../../pool");
-const billsUpdate = express.Router();
-
-billsUpdate.put("/", async (req, res) => {
+const coursesUpdate = express.Router();
+const { requireAuth } = require("../../../../middleware/authMiddleware");
+coursesUpdate.put("/",requireAuth, async (req, res) => {
   try {
     const { id } = req.query;
     const changed = [];
@@ -11,12 +11,12 @@ billsUpdate.put("/", async (req, res) => {
       changed.push(`${prop} = $${i++}`);
     }
     const { rows } = await pool.query(
-      `UPDATE public."Bills" SET ${changed} WHERE 1=1 AND id=$${i} RETURNING *`,
+      `UPDATE public."courses" SET ${changed} WHERE 1=1 AND id=$${i} RETURNING *`,
       [...Object.values(req.body), id]
     );
     res.json({
       success: true,
-      msg: "Bills was updated successfully.",
+      msg: "courses was updated successfully.",
       data: rows,
     });
   } catch ({ message }) {
@@ -24,4 +24,4 @@ billsUpdate.put("/", async (req, res) => {
   }
 });
 
-module.exports = billsUpdate;
+module.exports = coursesUpdate;

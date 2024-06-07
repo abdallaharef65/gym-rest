@@ -1,9 +1,9 @@
 const express = require("express");
 const pool = require("../../../../pool");
 const usersPost = express.Router();
-usersPost.post("/", async (req, res) => {
+const { requireAuth } = require("../../../../middleware/authMiddleware");
+usersPost.post("/",requireAuth, async (req, res) => {
   try {
-    // console.log("post132");
     const fields = Object.keys(req.body);
     const values = Object.values(req.body);
     const OrderOfvalues = [];

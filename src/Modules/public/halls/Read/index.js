@@ -2,8 +2,8 @@ const express = require("express");
 const pool = require("../../../../pool");
 const positiveNumberCheck = require("../../../../utils/positiveNumberCheck");
 const hallsRead = express.Router();
-
-hallsRead.get("/", async (req, res) => {
+const { requireAuth } = require("../../../../middleware/authMiddleware");
+hallsRead.get("/",requireAuth, async (req, res) => {
   try {
     const queryParams = req.query;
     const keys = Object.keys(queryParams);

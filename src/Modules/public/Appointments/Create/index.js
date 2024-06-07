@@ -2,11 +2,12 @@ const express = require("express");
 const pool = require("../../../../pool");
 const appointmentsPost = express.Router();
 const uuid = require("uuid");
-appointmentsPost.post("/", async (req, res) => {
+const { requireAuth } = require("../../../../middleware/authMiddleware");
+
+appointmentsPost.post("/", requireAuth, async (req, res) => {
   //appointments
   try {
     const sharedId = uuid.v4();
-    // console.log("post132");
     const fields = Object.keys({ ...req.body, sharedid: sharedId });
     const values = Object.values({ ...req.body, sharedid: sharedId });
     const OrderOfvalues = [];

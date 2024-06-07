@@ -1,5 +1,6 @@
 const express = require("express");
 const pool = require("../../../../pool");
+const createToken = require("../../../../utils/createToken");
 const usersPost = express.Router();
 const jwt = require("jsonwebtoken");
 
@@ -13,8 +14,6 @@ usersPost.post("/", async (req, res) => {
       [email]
     );
     const user = result.rows[0];
-    console.log(user);
-
     if (!user) {
       return res
         .status(200)
@@ -31,11 +30,7 @@ usersPost.post("/", async (req, res) => {
     }
 
     // Generate token
-    const token = jwt.sign(
-      { userId: user.id, email: user.email },
-      "secret_key",
-      { expiresIn: "1d" }
-    );
+    const token = createToken(user);
 
     res.status(200).json({
       success: true,

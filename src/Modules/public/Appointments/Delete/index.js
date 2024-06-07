@@ -1,8 +1,8 @@
 const express = require("express");
 const pool = require("../../../../pool");
 const appointmentsDelete = express.Router();
-
-appointmentsDelete.delete("/", async (req, res) => {
+const { requireAuth } = require("../../../../middleware/authMiddleware");
+appointmentsDelete.delete("/",requireAuth, async (req, res) => {
   try {
     const { id, sharedid } = req.query;
     const { rows } = id

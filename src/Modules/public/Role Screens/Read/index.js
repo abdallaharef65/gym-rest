@@ -2,8 +2,8 @@ const express = require("express");
 const pool = require("../../../../pool");
 const positiveNumberCheck = require("../../../../utils/positiveNumberCheck");
 const usersRead = express.Router();
-
-usersRead.get("/", async (req, res) => {
+const { requireAuth } = require("../../../../middleware/authMiddleware");
+usersRead.get("/",async (req, res) => {
   try {
     const queryParams = req.query;
     const keys = Object.keys(queryParams);
@@ -33,9 +33,7 @@ usersRead.get("/", async (req, res) => {
           res.send({
             success: true,
             no_of_records: rows.length,
-            msg: `Role Screens${
-              1 === rows.length ? "y was" : "ies were"
-            } retrieved successfully.`,
+            msg: `Role Screens retrieved successfully.`,
             data: rows,
           });
         } else {

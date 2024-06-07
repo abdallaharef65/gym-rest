@@ -31,9 +31,7 @@ usersRead.get("/", async (req, res) => {
           res.send({
             success: true,
             no_of_records: rows.length,
-            msg: `Screens${
-              1 === rows.length ? "y was" : "ies were"
-            } retrieved successfully.`,
+            msg: `Screens retrieved successfully.`,
             data: rows,
           });
         } else {

@@ -1,8 +1,8 @@
 const express = require("express");
 const pool = require("../../../../pool");
 const userUpdate = express.Router();
-
-userUpdate.put("/", async (req, res) => {
+const { requireAuth } = require("../../../../middleware/authMiddleware");
+userUpdate.put("/",requireAuth, async (req, res) => {
   try {
     const { id } = req.query;
     const changed = [];

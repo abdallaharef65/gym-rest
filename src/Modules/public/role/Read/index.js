@@ -2,7 +2,7 @@ const express = require("express");
 const pool = require("../../../../pool");
 const positiveNumberCheck = require("../../../../utils/positiveNumberCheck");
 const usersRead = express.Router();
-
+const { requireAuth } = require("../../../../middleware/authMiddleware");
 usersRead.get("/", async (req, res) => {
   try {
     const queryParams = req.query;
@@ -31,8 +31,7 @@ usersRead.get("/", async (req, res) => {
           res.send({
             success: true,
             no_of_records: rows.length,
-            msg: `role${1 === rows.length ? " was" : "ies were"
-              } retrieved successfully.`,
+            msg: `role retrieved successfully.`,
             data: rows,
           });
         } else {

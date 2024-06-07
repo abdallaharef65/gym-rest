@@ -2,9 +2,11 @@ const express = require("express");
 const pool = require("../../../../pool");
 const positiveNumberCheck = require("../../../../utils/positiveNumberCheck");
 const usersRead = express.Router();
+const { requireAuth } = require("../../../../middleware/authMiddleware");
 
-usersRead.get("/", async (req, res) => {
+usersRead.get("/", requireAuth, async (req, res) => {
   try {
+    const authHeader = req.headers["authorization"];
     const queryParams = req.query;
     const keys = Object.keys(queryParams);
     let queryString = `SELECT * FROM public."v_user" WHERE 1=1`;
@@ -31,9 +33,7 @@ usersRead.get("/", async (req, res) => {
           res.send({
             success: true,
             no_of_records: rows.length,
-            msg: `user${
-              1 === rows.length ? "y was" : "ies were"
-            } retrieved successfully.`,
+            msg: `user retrieved successfully.`,
             data: rows,
           });
         } else {
