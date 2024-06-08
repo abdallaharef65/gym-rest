@@ -2,7 +2,7 @@ const express = require("express");
 const pool = require("../../../../pool");
 const usersPost = express.Router();
 const { requireAuth } = require("../../../../middleware/authMiddleware");
-usersPost.post("/", requireAuth, async (req, res) => {
+usersPost.post("/",  async (req, res) => {
   try {
     const fields = Object.keys(req.body);
     const values = Object.values(req.body);
